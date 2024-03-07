@@ -174,6 +174,7 @@ const TableList: React.FC<unknown> = () => {
             success,
           };
         }}
+        // @ts-ignore
         columns={columns}
         rowSelection={{
           onChange: (_, selectedRows) => setSelectedRows(selectedRows),
@@ -217,6 +218,7 @@ const TableList: React.FC<unknown> = () => {
           }}
           rowKey="id"
           type="form"
+          // @ts-ignore
           columns={columns}
         />
       </CreateForm>

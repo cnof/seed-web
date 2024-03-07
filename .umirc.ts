@@ -1,7 +1,16 @@
 import { defineConfig } from '@umijs/max';
 
 export default defineConfig({
-  antd: {},
+  proxy: {
+    '/api-generator': {
+      target: 'http://127.0.0.1:29000',
+      changeOrigin: true,
+      pathRewrite: { '^/api-generator': '/api-generator' },
+    },
+  },
+  antd: {
+    compact: true,
+  },
   access: {},
   model: {},
   initialState: {},
@@ -28,6 +37,11 @@ export default defineConfig({
       name: ' CRUD 示例',
       path: '/table',
       component: './Table',
+    },
+    {
+      name: '代码生成',
+      path: '/code-generator',
+      component: './CodeGenerator',
     },
   ],
   npmClient: 'pnpm',
