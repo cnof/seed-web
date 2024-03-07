@@ -8,7 +8,7 @@ import {
   ProColumns,
   ProTable,
 } from '@ant-design/pro-components';
-import { Button } from 'antd';
+import { Button, Divider } from 'antd';
 import React, { useRef, useState } from 'react';
 
 const TableList: React.FC<unknown> = () => {
@@ -46,6 +46,26 @@ const TableList: React.FC<unknown> = () => {
       title: '创建时间',
       dataIndex: 'createTime',
       valueType: 'text',
+    },
+    {
+      title: '操作',
+      dataIndex: 'option',
+      valueType: 'option',
+      render: (_, record) => (
+        <>
+          <a
+            onClick={() => {
+              handleRemoveGenTables([record]).then(() =>
+                actionRef.current?.reloadAndRest?.(),
+              );
+            }}
+          >
+            删除
+          </a>
+          <Divider type="vertical" />
+          <a href="">订阅警报</a>
+        </>
+      ),
     },
   ];
 
