@@ -5,6 +5,11 @@ declare namespace CommonAPI {
     msg?: string;
   }
 
+  interface Page {
+    currentPage?: number;
+    pageSize?: number;
+  }
+
   interface Pagination {
     page?: number;
     pageSize?: number;

@@ -39,9 +39,20 @@ export default defineConfig({
       component: './Table',
     },
     {
-      name: '代码生成',
-      path: '/code-generator',
-      component: './CodeGenerator',
+      name: '系统工具',
+      path: '/system-tool',
+      routes: [
+        {
+          name: '代码生成',
+          path: '/system-tool/code-generator',
+          component: './SystemTool/CodeGenerator',
+        },
+        {
+          name: '修改生成配置',
+          path: '/system-tool/gen-table/info/:tableId',
+          component: './SystemTool/GenTable',
+        },
+      ],
     },
   ],
   npmClient: 'pnpm',

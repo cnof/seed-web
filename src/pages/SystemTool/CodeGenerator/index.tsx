@@ -1,5 +1,5 @@
-import ImportForm from '@/pages/CodeGenerator/components/ImportForm';
-import { handleRemoveGenTables } from '@/pages/CodeGenerator/redux';
+import ImportForm from '@/pages/SystemTool/CodeGenerator/components/ImportForm';
+import { handleRemoveGenTables } from '@/pages/SystemTool/CodeGenerator/redux';
 import { queryGenTableList } from '@/services/codegenerator/CodeGeneratorController';
 import {
   ActionType,
@@ -8,6 +8,7 @@ import {
   ProColumns,
   ProTable,
 } from '@ant-design/pro-components';
+import { Link } from '@umijs/max';
 import { Button, Divider } from 'antd';
 import React, { useRef, useState } from 'react';
 
@@ -53,6 +54,13 @@ const TableList: React.FC<unknown> = () => {
       valueType: 'option',
       render: (_, record) => (
         <>
+          <Link
+            state={record}
+            to={'/system-tool/gen-table/info/' + record.tableId}
+          >
+            编辑
+          </Link>
+          <Divider type="vertical" />
           <a
             onClick={() => {
               handleRemoveGenTables([record]).then(() =>
@@ -63,7 +71,9 @@ const TableList: React.FC<unknown> = () => {
             删除
           </a>
           <Divider type="vertical" />
-          <a href="">订阅警报</a>
+          <a href="">同步</a>
+          <Divider type="vertical" />
+          <a href="">生成代码</a>
         </>
       ),
     },
@@ -84,15 +94,12 @@ const TableList: React.FC<unknown> = () => {
           </Button>,
         ]}
         columns={columns}
-        request={async (params, sorter, filter) => {
-          const { data } = await queryGenTableList({
-            currentPage: params.current,
+        request={async (params) => {
+          let param: CodeGeneratorAPI.GenTablePageQueryVO = {
             pageSize: params.pageSize,
-            ...params,
-            // @ts-ignore
-            sorter,
-            filter,
-          });
+            currentPage: params.current,
+          };
+          const { data } = await queryGenTableList(param);
           return {
             data: data?.rows || [],
             total: data?.pagination.totalCount,

@@ -46,23 +46,24 @@ export async function queryUnusedTableList(
 }
 
 export async function queryGenTableList(
-  params: {
-    /** current */
-    currentPage?: number;
-    /** pageSize */
-    pageSize?: number;
-  },
-  sorter?: any,
+  body?: CodeGeneratorAPI.GenTablePageQueryVO,
   options?: { [key: string]: any },
 ) {
   return request<CodeGeneratorAPI.Result_GenTablePageInfo>(
-    '/api-generator/gen-table',
+    '/api-generator/gen-table/list',
+    {
+      method: 'POST',
+      data: body,
+      ...(options || {}),
+    },
+  );
+}
+
+export async function queryGenTableColumnList(tableId?: number) {
+  return request<CodeGeneratorAPI.Result_GenTableColumnPageInfo>(
+    '/api-generator/gen-table/column/table-id/' + tableId,
     {
       method: 'GET',
-      params: {
-        ...params,
-      },
-      ...(options || {}),
     },
   );
 }

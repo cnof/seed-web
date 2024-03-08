@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 
-import { handleImport } from '@/pages/CodeGenerator/redux';
+import { handleImport } from '@/pages/SystemTool/CodeGenerator/redux';
 import { queryUnusedTableList } from '@/services/codegenerator/CodeGeneratorController';
 import { ActionType, ProColumns, ProTable } from '@ant-design/pro-components';
 import { Modal } from 'antd';
